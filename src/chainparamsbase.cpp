@@ -51,6 +51,19 @@ public:
 };
 static CBaseRegTestParams regTestParams;
 
+//
+// Simnet (v3)
+//
+class CBaseSimNetParams : public CBaseMainParams {
+public:
+    CBaseSimNetParams() {
+        networkID = CBaseChainParams::SIMNET;
+        nRPCPort = 18556;
+        strDataDir = "simnet";
+    }
+};
+static CBaseSimNetParams simNetParams;
+
 static CBaseChainParams *pCurrentBaseParams = 0;
 
 const CBaseChainParams &BaseParams() {
@@ -69,6 +82,9 @@ void SelectBaseParams(CBaseChainParams::Network network) {
         case CBaseChainParams::REGTEST:
             pCurrentBaseParams = &regTestParams;
             break;
+        case CBaseChainParams::SIMNET:
+            pCurrentBaseParams = &simNetParams;
+            break;
         default:
             assert(false && "Unimplemented network");
             return;
@@ -78,6 +94,7 @@ void SelectBaseParams(CBaseChainParams::Network network) {
 bool SelectBaseParamsFromCommandLine() {
     bool fRegTest = GetBoolArg("-regtest", false);
     bool fTestNet = GetBoolArg("-testnet", false);
+    bool fSimNet = GetBoolArg("-simnet", false);
 
     if (fTestNet && fRegTest) {
         return false;
@@ -85,6 +102,8 @@ bool SelectBaseParamsFromCommandLine() {
 
     if (fRegTest) {
         SelectBaseParams(CBaseChainParams::REGTEST);
+    } else if (fSimNet) {
+        SelectBaseParams(CBaseChainParams::SIMNET);
     } else if (fTestNet) {
         SelectBaseParams(CBaseChainParams::TESTNET);
     } else {

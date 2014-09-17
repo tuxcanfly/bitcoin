@@ -214,6 +214,30 @@ public:
 };
 static CRegTestParams regTestParams;
 
+class CSimNetParams : public CTestNetParams {
+public:
+    CSimNetParams() {
+        networkID = CBaseChainParams::SIMNET;
+        strNetworkID = "simnet";
+        pchMessageStart[0] = 0x16;
+        pchMessageStart[1] = 0x1c;
+        pchMessageStart[2] = 0x14;
+        pchMessageStart[3] = 0x12;
+        nDefaultPort = 18555;
+        bnProofOfWorkLimit = ~uint256(0) >> 1;
+
+        vSeeds.clear();  // SimNet mode doesn't have any DNS seeds.
+
+        base58Prefixes[PUBKEY_ADDRESS] = list_of(63);
+        base58Prefixes[SCRIPT_ADDRESS] = list_of(123);
+        base58Prefixes[SECRET_KEY]     = list_of(100);
+
+        base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x04)(0x20)(0xbd)(0x3a);
+        base58Prefixes[EXT_SECRET_KEY] = list_of(0x04)(0x20)(0xb9)(0x00);
+    }
+};
+static CSimNetParams simNetParams;
+
 static CChainParams *pCurrentParams = 0;
 
 const CChainParams &Params() {
@@ -229,6 +253,8 @@ CChainParams &Params(CBaseChainParams::Network network) {
             return testNetParams;
         case CBaseChainParams::REGTEST:
             return regTestParams;
+        case CBaseChainParams::SIMNET:
+            return simNetParams;
         default:
             assert(false && "Unimplemented network");
             return mainParams;
