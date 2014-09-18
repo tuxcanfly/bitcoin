@@ -54,7 +54,7 @@ static CBaseRegTestParams regTestParams;
 //
 // Simnet (v3)
 //
-class CBaseSimNetParams : public CBaseMainParams {
+class CBaseSimNetParams : public CBaseTestNetParams {
 public:
     CBaseSimNetParams() {
         networkID = CBaseChainParams::SIMNET;
