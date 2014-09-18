@@ -225,6 +225,11 @@ public:
         pchMessageStart[3] = 0x12;
         nDefaultPort = 18555;
         bnProofOfWorkLimit = ~uint256(0) >> 1;
+        genesis.nTime = 1401292357;
+        genesis.nBits = 0x207fffff;
+        genesis.nNonce = 2;
+        hashGenesisBlock = genesis.GetHash();
+        assert(hashGenesisBlock == uint256("0x683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6"));
 
         vSeeds.clear();  // SimNet mode doesn't have any DNS seeds.
 

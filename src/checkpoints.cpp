@@ -83,12 +83,12 @@ namespace Checkpoints {
         0
     };
 
-    static MapCheckpoints mapCheckpointsSimtest =
+    static MapCheckpoints mapCheckpointsSimnet =
         boost::assign::map_list_of
-        ( 0, uint256("000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943"))
+        ( 0, uint256("683e86bd5c6d110d91b94b97137ba6bfe02dbbdb8e3dff722a669b5d69d77af6"))
         ;
-    static const CCheckpointData dataSimtest = {
-        &mapCheckpointsSimtest,
+    static const CCheckpointData dataSimnet = {
+        &mapCheckpointsSimnet,
         0,
         0,
         0
@@ -98,7 +98,7 @@ namespace Checkpoints {
         if (Params().NetworkID() == CBaseChainParams::TESTNET)
             return dataTestnet;
         else if (Params().NetworkID() == CBaseChainParams::SIMNET)
-            return dataSimtest;
+            return dataSimnet;
         else if (Params().NetworkID() == CBaseChainParams::MAIN)
             return data;
         else
